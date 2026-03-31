@@ -3,7 +3,7 @@ package com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.mapp
 import com.juanjose.backendfastfix.domain.model.Client;
 import com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.entity.ClientEntity;
 
-public class ClientMapper {
+public class ClientPersistenceMapper {
     public static ClientEntity toEntity (Client client){
         ClientEntity entity = new ClientEntity();
         entity.setId(client.getId());

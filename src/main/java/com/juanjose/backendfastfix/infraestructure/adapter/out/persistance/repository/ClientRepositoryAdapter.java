@@ -3,7 +3,7 @@ package com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.repo
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.domain.model.Client;
 import com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.entity.ClientEntity;
-import com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.mapper.ClientMapper;
+import com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.mapper.ClientPersistenceMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,9 +17,9 @@ public class ClientRepositoryAdapter implements ClientRepositoryPort {
 
     @Override
     public Client save(Client client) {
-        ClientEntity entity = ClientMapper.toEntity(client);
+        ClientEntity entity = ClientPersistenceMapper.toEntity(client);
         ClientEntity savedEntity = jpaClientRepository.save(entity);
-        return ClientMapper.toDomain(savedEntity);
+        return ClientPersistenceMapper.toDomain(savedEntity);
     }
 
     @Override
