@@ -1,0 +1,29 @@
+package com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.repository;
+
+import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
+import com.juanjose.backendfastfix.domain.model.Client;
+import com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.entity.ClientEntity;
+import com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.mapper.ClientMapper;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class ClientRepositoryAdapter implements ClientRepositoryPort {
+    private final JpaClientRepository jpaClientRepository;
+
+    public ClientRepositoryAdapter(JpaClientRepository jpaClientRepository) {
+        this.jpaClientRepository = jpaClientRepository;
+    }
+
+
+    @Override
+    public Client save(Client client) {
+        ClientEntity entity = ClientMapper.toEntity(client);
+        ClientEntity savedEntity = jpaClientRepository.save(entity);
+        return ClientMapper.toDomain(savedEntity);
+    }
+
+    @Override
+    public boolean exitsByEmail(String email) {
+        return jpaClientRepository.existsByEmail(email);
+    }
+}
