@@ -2,6 +2,7 @@ package com.juanjose.backendfastfix.application.service;
 
 import com.juanjose.backendfastfix.application.port.in.RegisterClientUseCase;
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
+import com.juanjose.backendfastfix.domain.exception.EmailAlreadyExists;
 import com.juanjose.backendfastfix.domain.model.Client;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class RegisterClientService implements RegisterClientUseCase {
     @Override
     public Client register(Client client) {
         if(clientRepositoryPort.exitsByEmail(client.getEmail())){
-            throw new RuntimeException("Email already exits");
+            throw new EmailAlreadyExists(client.getEmail());
         }
         return clientRepositoryPort.save(client);
     }
