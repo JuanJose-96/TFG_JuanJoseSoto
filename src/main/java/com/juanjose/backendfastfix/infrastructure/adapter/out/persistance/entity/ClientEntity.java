@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.entity;
+package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity;
 
 
 import jakarta.persistence.*;

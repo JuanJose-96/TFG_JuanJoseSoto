@@ -1,9 +1,9 @@
-package com.juanjose.backendfastfix.infraestructure.adapter.in.rest;
+package com.juanjose.backendfastfix.infrastructure.adapter.in.rest;
 
 import com.juanjose.backendfastfix.application.port.in.RegisterClientUseCase;
-import com.juanjose.backendfastfix.infraestructure.adapter.in.rest.dto.ClientResponse;
-import com.juanjose.backendfastfix.infraestructure.adapter.in.rest.dto.RegisterClientRequest;
-import com.juanjose.backendfastfix.infraestructure.adapter.in.rest.mapper.ClientRestMapper;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.ClientResponse;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.RegisterClientRequest;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper.ClientRestMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

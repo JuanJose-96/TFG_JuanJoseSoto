@@ -1,7 +1,7 @@
-package com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.mapper;
+package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.mapper;
 
 import com.juanjose.backendfastfix.domain.model.Client;
-import com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.entity.ClientEntity;
+import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.ClientEntity;
 
 public class ClientPersistenceMapper {
     public static ClientEntity toEntity (Client client){

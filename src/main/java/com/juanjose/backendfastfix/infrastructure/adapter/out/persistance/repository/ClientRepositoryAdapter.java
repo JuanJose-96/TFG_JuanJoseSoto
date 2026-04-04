@@ -1,9 +1,9 @@
-package com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.repository;
+package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository;
 
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.domain.model.Client;
-import com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.entity.ClientEntity;
-import com.juanjose.backendfastfix.infraestructure.adapter.out.persistance.mapper.ClientPersistenceMapper;
+import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.ClientEntity;
+import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.mapper.ClientPersistenceMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
