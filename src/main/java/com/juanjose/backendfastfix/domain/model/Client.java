@@ -18,12 +18,12 @@ public class Client {
     private String profileImageUrl;
     private String province;
     private String city;
-    private boolean verified;
+
 
 
     public Client(String name, String surname, String email, String password,
                   String phone, String profileImageUrl, String province,
-                  String city, boolean verified) {
+                  String city,) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -32,6 +32,5 @@ public class Client {
         this.profileImageUrl = profileImageUrl;
         this.province = province;
         this.city = city;
-        this.verified = verified;
     }
 }

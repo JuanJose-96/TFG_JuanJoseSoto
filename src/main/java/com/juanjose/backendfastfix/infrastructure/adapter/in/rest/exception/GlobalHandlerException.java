@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.validation.method.MethodValidationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -41,7 +40,7 @@ public class GlobalHandlerException {
                 ));
     }
 
-    @ExceptionHandler(MethodValidationException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationErrorResponse> handleValidationException(MethodArgumentNotValidException ex){
         Map<String,String> fieldErrors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(e ->

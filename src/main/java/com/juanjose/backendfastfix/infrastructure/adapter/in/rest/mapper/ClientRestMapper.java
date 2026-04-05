@@ -13,8 +13,7 @@ public class ClientRestMapper {
                 registerClientRequest.phone(),
                 null,
                 registerClientRequest.province(),
-                registerClientRequest.city(),
-                false);
+                registerClientRequest.city());
     }
     public static ClientResponse fromDomain(Client client){
         return new ClientResponse(client.getId(),
@@ -24,8 +23,7 @@ public class ClientRestMapper {
                 client.getPhone(),
                 client.getProfileImageUrl(),
                 client.getProvince(),
-                client.getCity(),
-                client.isVerified());
+                client.getCity());
 
     }
 }

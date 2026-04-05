@@ -15,7 +15,6 @@ public class ClientPersistenceMapper {
         entity.setProfileImageUrl(client.getProfileImageUrl());
         entity.setProvince(client.getProvince());
         entity.setCity(client.getCity());
-        entity.setVerified(client.isVerified());
         return entity;
 
     }
@@ -23,7 +22,7 @@ public class ClientPersistenceMapper {
         return new Client( entity.getId(), entity.getName(),
                 entity.getSurname(), entity.getEmail(), entity.getPassword(),
                 entity.getPhone(), entity.getProfileImageUrl(),
-                entity.getProvince(), entity.getCity(), entity.isVerified() );
+                entity.getProvince(), entity.getCity());
 
     }
 }

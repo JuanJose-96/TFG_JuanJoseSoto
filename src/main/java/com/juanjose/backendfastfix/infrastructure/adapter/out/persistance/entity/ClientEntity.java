@@ -32,6 +32,6 @@ public class ClientEntity {
     private String province;
     @Column (nullable = false)
     private String city;
-    private boolean verified;
+
 
 }

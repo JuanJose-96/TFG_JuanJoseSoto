@@ -8,7 +8,6 @@ public record ClientResponse(
         String phone,
         String profileImageUrl,
         String province,
-        String city,
-        boolean verified
+        String city
 ) {
 }
