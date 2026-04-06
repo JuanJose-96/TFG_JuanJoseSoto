@@ -1,6 +1,7 @@
 package com.juanjose.backendfastfix.domain.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder(toBuilder = true)
 public class Client {
     private Long id;
     private String name;
@@ -23,7 +25,7 @@ public class Client {
 
     public Client(String name, String surname, String email, String password,
                   String phone, String profileImageUrl, String province,
-                  String city,) {
+                  String city) {
         this.name = name;
         this.surname = surname;
         this.email = email;
