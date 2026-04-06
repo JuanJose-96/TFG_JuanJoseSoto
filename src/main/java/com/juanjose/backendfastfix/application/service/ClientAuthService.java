@@ -1,18 +1,21 @@
 package com.juanjose.backendfastfix.application.service;
 
+import com.juanjose.backendfastfix.application.port.in.LoginClientUseCase;
 import com.juanjose.backendfastfix.application.port.in.RegisterClientUseCase;
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.application.port.out.PasswordEncoderPort;
+import com.juanjose.backendfastfix.domain.exception.ClientNotFounByEmailException;
 import com.juanjose.backendfastfix.domain.exception.EmailAlreadyExists;
+import com.juanjose.backendfastfix.domain.exception.InvalidPasswordException;
 import com.juanjose.backendfastfix.domain.model.Client;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ClientService implements RegisterClientUseCase {
+public class ClientAuthService implements RegisterClientUseCase, LoginClientUseCase {
     private final ClientRepositoryPort clientRepositoryPort;
     private final PasswordEncoderPort passwordEncoderPort;
 
-    public ClientService(ClientRepositoryPort clientRepositoryPort, PasswordEncoderPort passwordEncoderPort) {
+    public ClientAuthService(ClientRepositoryPort clientRepositoryPort, PasswordEncoderPort passwordEncoderPort) {
         this.clientRepositoryPort = clientRepositoryPort;
         this.passwordEncoderPort = passwordEncoderPort;
     }
@@ -28,5 +31,16 @@ public class ClientService implements RegisterClientUseCase {
                 .build();
         return clientRepositoryPort.save(clientToSave);
     }
-    
+
+    @Override
+    public Client login(String email, String password) {
+        Client client = clientRepositoryPort.findByEmail(email)
+                .orElseThrow(() -> new ClientNotFounByEmailException(email));
+
+        if(!passwordEncoderPort.matches(password,client.getPassword())){
+            throw new InvalidPasswordException();
+        }
+
+        return client;
+    }
 }
