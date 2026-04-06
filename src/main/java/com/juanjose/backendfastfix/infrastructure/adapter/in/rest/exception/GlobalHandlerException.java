@@ -1,7 +1,9 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.exception;
 
+import com.juanjose.backendfastfix.domain.exception.ClientNotFounByEmailException;
 import com.juanjose.backendfastfix.domain.exception.DomainException;
 import com.juanjose.backendfastfix.domain.exception.EmailAlreadyExists;
+import com.juanjose.backendfastfix.domain.exception.InvalidPasswordException;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.ApiErrorResponse;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.ValidationErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -51,6 +53,28 @@ public class GlobalHandlerException {
                         HttpStatus.BAD_REQUEST.value(),
                         "Validation failed",
                         fieldErrors,
+                        LocalDateTime.now().toString()
+                ));
+
+    }
+    @ExceptionHandler(ClientNotFounByEmailException.class)
+    public ResponseEntity<ApiErrorResponse> handleClientNotFoundByEmailException(ClientNotFounByEmailException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiErrorResponse(
+                        HttpStatus.NOT_FOUND.value(),
+                        "Not found",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()));
+
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<ApiErrorResponse> handleInvalidPasswordException(InvalidPasswordException ex){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new ApiErrorResponse(
+                        HttpStatus.UNAUTHORIZED.value(),
+                        "Unauthorized",
+                        ex.getMessage(),
                         LocalDateTime.now().toString()
                 ));
 
