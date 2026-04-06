@@ -28,4 +28,5 @@ public class ClientService implements RegisterClientUseCase {
                 .build();
         return clientRepositoryPort.save(clientToSave);
     }
+    
 }
