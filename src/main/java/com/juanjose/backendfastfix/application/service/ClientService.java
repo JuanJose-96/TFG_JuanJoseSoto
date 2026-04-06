@@ -8,11 +8,11 @@ import com.juanjose.backendfastfix.domain.model.Client;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterClientService implements RegisterClientUseCase {
+public class ClientService implements RegisterClientUseCase {
     private final ClientRepositoryPort clientRepositoryPort;
     private final PasswordEncoderPort passwordEncoderPort;
 
-    public RegisterClientService(ClientRepositoryPort clientRepositoryPort, PasswordEncoderPort passwordEncoderPort) {
+    public ClientService(ClientRepositoryPort clientRepositoryPort, PasswordEncoderPort passwordEncoderPort) {
         this.clientRepositoryPort = clientRepositoryPort;
         this.passwordEncoderPort = passwordEncoderPort;
     }
