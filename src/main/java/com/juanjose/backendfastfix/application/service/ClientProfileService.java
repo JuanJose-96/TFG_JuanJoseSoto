@@ -4,7 +4,9 @@ import com.juanjose.backendfastfix.application.port.in.UpdateClientProfileUseCas
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.domain.exception.ClientNotFoundException;
 import com.juanjose.backendfastfix.domain.model.Client;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ClientProfileService implements UpdateClientProfileUseCase {
 
     private final ClientRepositoryPort clientRepositoryPort;
@@ -20,11 +22,11 @@ public class ClientProfileService implements UpdateClientProfileUseCase {
                 .orElseThrow(() -> new ClientNotFoundException(id));
 
         Client clientUpdated = client.toBuilder()
-                .name(name != null ? name : client.getName())
-                .surname(surname != null ? surname : client.getSurname())
-                .phone(phone != null ? phone : client.getPhone())
-                .province(province != null ? province : client.getProvince())
-                .city(city != null ? city : client.getCity()).build();
+                .name(name)
+                .surname(surname)
+                .phone(phone)
+                .province(province)
+                .city(city).build();
 
         return clientRepositoryPort.save(clientUpdated);
     }
