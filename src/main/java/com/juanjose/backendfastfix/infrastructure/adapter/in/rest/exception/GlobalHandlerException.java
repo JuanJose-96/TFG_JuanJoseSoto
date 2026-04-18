@@ -1,6 +1,6 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.exception;
 
-import com.juanjose.backendfastfix.domain.exception.ClientNotFounByEmailException;
+import com.juanjose.backendfastfix.domain.exception.ClientNotFoundException;
 import com.juanjose.backendfastfix.domain.exception.DomainException;
 import com.juanjose.backendfastfix.domain.exception.EmailAlreadyExists;
 import com.juanjose.backendfastfix.domain.exception.InvalidPasswordException;
@@ -57,8 +57,8 @@ public class GlobalHandlerException {
                 ));
 
     }
-    @ExceptionHandler(ClientNotFounByEmailException.class)
-    public ResponseEntity<ApiErrorResponse> handleClientNotFoundByEmailException(ClientNotFounByEmailException ex){
+    @ExceptionHandler(ClientNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleClientNotFoundByEmailException(ClientNotFoundException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ApiErrorResponse(
                         HttpStatus.NOT_FOUND.value(),

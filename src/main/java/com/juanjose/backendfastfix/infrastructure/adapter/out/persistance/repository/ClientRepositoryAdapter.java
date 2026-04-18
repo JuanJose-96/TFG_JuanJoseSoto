@@ -35,5 +35,10 @@ public class ClientRepositoryAdapter implements ClientRepositoryPort {
                 .map(clientEntity -> ClientPersistenceMapper.toDomain(clientEntity));
     }
 
+    @Override
+    public Optional<Client> findById(Long id) {
+        return jpaClientRepository.findById(id).map(clientEntity -> ClientPersistenceMapper.toDomain(clientEntity));
+    }
+
 
 }
