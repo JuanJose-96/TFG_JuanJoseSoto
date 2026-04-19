@@ -1,9 +1,6 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.exception;
 
-import com.juanjose.backendfastfix.domain.exception.ClientNotFoundException;
-import com.juanjose.backendfastfix.domain.exception.DomainException;
-import com.juanjose.backendfastfix.domain.exception.EmailAlreadyExists;
-import com.juanjose.backendfastfix.domain.exception.InvalidPasswordException;
+import com.juanjose.backendfastfix.domain.exception.*;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.ApiErrorResponse;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.ValidationErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -78,6 +75,28 @@ public class GlobalHandlerException {
                         LocalDateTime.now().toString()
                 ));
 
+    }
+
+    @ExceptionHandler(ImageUploadException.class)
+    public ResponseEntity<ApiErrorResponse> handleImageUpload(ImageUploadException ex){
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ApiErrorResponse(
+                        HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                        "Internal server error",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                ));
+
+    }
+
+    public ResponseEntity<ApiErrorResponse> handleInvalidFile(InvalidFileException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ApiErrorResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        "Bad request",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                ));
     }
 
 
