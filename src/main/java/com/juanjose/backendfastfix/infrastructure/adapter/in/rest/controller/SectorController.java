@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.infrastructure.adapter.in.rest;
+package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller;
 
 import com.juanjose.backendfastfix.application.port.in.GetSectorsUseCase;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.SectorResponse;
