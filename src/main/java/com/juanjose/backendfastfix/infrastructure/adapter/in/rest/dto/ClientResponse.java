@@ -8,6 +8,7 @@ public record ClientResponse(
         String phone,
         String profileImageUrl,
         String province,
-        String city
+        String city,
+        boolean whatsappAvailable
 ) {
 }

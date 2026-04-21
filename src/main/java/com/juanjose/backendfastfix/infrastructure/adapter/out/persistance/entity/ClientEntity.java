@@ -32,6 +32,8 @@ public class ClientEntity {
     private String province;
     @Column (nullable = false)
     private String city;
+    @Column(nullable = false)
+    private boolean whatsappAvailable;
 
 
 }

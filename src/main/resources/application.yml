@@ -3,6 +3,10 @@ spring:
     init:
       mode: always
 
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
   datasource:
     url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
     username: ${POSTGRES_USER}
@@ -12,3 +16,5 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+cloudinary:
+  url: ${CLOUDINARY_URL}

@@ -4,7 +4,7 @@ import com.juanjose.backendfastfix.application.port.in.LoginClientUseCase;
 import com.juanjose.backendfastfix.application.port.in.RegisterClientUseCase;
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.application.port.out.PasswordEncoderPort;
-import com.juanjose.backendfastfix.domain.exception.ClientNotFounByEmailException;
+import com.juanjose.backendfastfix.domain.exception.ClientNotFoundException;
 import com.juanjose.backendfastfix.domain.exception.EmailAlreadyExists;
 import com.juanjose.backendfastfix.domain.exception.InvalidPasswordException;
 import com.juanjose.backendfastfix.domain.model.Client;
@@ -35,7 +35,7 @@ public class ClientAuthService implements RegisterClientUseCase, LoginClientUseC
     @Override
     public Client login(String email, String password) {
         Client client = clientRepositoryPort.findByEmail(email)
-                .orElseThrow(() -> new ClientNotFounByEmailException(email));
+                .orElseThrow(() -> new ClientNotFoundException(email));
 
         if(!passwordEncoderPort.matches(password,client.getPassword())){
             throw new InvalidPasswordException();

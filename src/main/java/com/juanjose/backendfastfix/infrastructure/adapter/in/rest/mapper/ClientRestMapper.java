@@ -5,15 +5,17 @@ import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.ClientResp
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.RegisterClientRequest;
 
 public class ClientRestMapper {
-    public static Client clientRegistrationToDomain(RegisterClientRequest registerClientRequest){
-        return new Client(registerClientRequest.name(),
-                registerClientRequest.surname(),
-                registerClientRequest.email(),
-                registerClientRequest.password(),
-                registerClientRequest.phone(),
-                null,
-                registerClientRequest.province(),
-                registerClientRequest.city());
+    public static Client clientRegistrationToDomain(RegisterClientRequest request){
+        return Client.builder()
+                .name(request.name())
+                .surname(request.surname())
+                .email(request.email())
+                .password(request.password())
+                .phone(request.phone())
+                .province(request.province())
+                .city(request.city())
+                .build();
+
     }
     public static ClientResponse fromDomain(Client client){
         return new ClientResponse(client.getId(),
@@ -23,7 +25,8 @@ public class ClientRestMapper {
                 client.getPhone(),
                 client.getProfileImageUrl(),
                 client.getProvince(),
-                client.getCity());
+                client.getCity(),
+                client.isWhatsappAvailable());
 
     }
 }
