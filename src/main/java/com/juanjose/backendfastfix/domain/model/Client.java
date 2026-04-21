@@ -20,19 +20,10 @@ public class Client {
     private String profileImageUrl;
     private String province;
     private String city;
+    @Builder.Default
+    private boolean whatsappAvailable = true;
 
 
 
-    public Client(String name, String surname, String email, String password,
-                  String phone, String profileImageUrl, String province,
-                  String city) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.profileImageUrl = profileImageUrl;
-        this.province = province;
-        this.city = city;
-    }
+
 }
