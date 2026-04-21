@@ -15,14 +15,24 @@ public class ClientPersistenceMapper {
         entity.setProfileImageUrl(client.getProfileImageUrl());
         entity.setProvince(client.getProvince());
         entity.setCity(client.getCity());
+        entity.setWhatsappAvailable(client.isWhatsappAvailable());
         return entity;
 
     }
     public static Client toDomain (ClientEntity entity){
-        return new Client( entity.getId(), entity.getName(),
-                entity.getSurname(), entity.getEmail(), entity.getPassword(),
-                entity.getPhone(), entity.getProfileImageUrl(),
-                entity.getProvince(), entity.getCity());
+        return Client.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .surname(entity.getSurname())
+                .email(entity.getEmail())
+                .password(entity.getPassword())
+                .phone(entity.getPhone())
+                .profileImageUrl(entity.getProfileImageUrl())
+                .province(entity.getProvince())
+                .city(entity.getCity())
+                .whatsappAvailable(entity.isWhatsappAvailable())
+                .build();
+
 
     }
 }

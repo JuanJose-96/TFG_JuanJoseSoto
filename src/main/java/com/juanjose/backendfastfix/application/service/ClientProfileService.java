@@ -24,7 +24,7 @@ public class ClientProfileService implements UpdateClientProfileUseCase, UploadC
 
 
     @Override
-    public Client updateProfile(Long id, String name, String surname, String phone, String province, String city) {
+    public Client updateProfile(Long id, String name, String surname, String phone, String province, String city, boolean whatsappAvailable) {
         Client client = clientRepositoryPort.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException(id));
 
@@ -33,7 +33,9 @@ public class ClientProfileService implements UpdateClientProfileUseCase, UploadC
                 .surname(surname)
                 .phone(phone)
                 .province(province)
-                .city(city).build();
+                .city(city)
+                .whatsappAvailable(whatsappAvailable)
+                .build();
 
         return clientRepositoryPort.save(clientUpdated);
     }
@@ -59,4 +61,6 @@ public class ClientProfileService implements UpdateClientProfileUseCase, UploadC
         Client clientImage = client.toBuilder().profileImageUrl(imageUrl).build();
         return clientRepositoryPort.save(clientImage);
     }
+
+
 }
