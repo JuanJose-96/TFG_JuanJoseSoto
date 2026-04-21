@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class GlobalHandlerException {
+public class GlobalHandlerClientException {
 
     @ExceptionHandler(EmailAlreadyExists.class)
     public ResponseEntity <ApiErrorResponse> handleEmailAlreadyExists(EmailAlreadyExists ex){
@@ -89,6 +89,7 @@ public class GlobalHandlerException {
 
     }
 
+    @ExceptionHandler(InvalidFileException.class)
     public ResponseEntity<ApiErrorResponse> handleInvalidFile(InvalidFileException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ApiErrorResponse(
