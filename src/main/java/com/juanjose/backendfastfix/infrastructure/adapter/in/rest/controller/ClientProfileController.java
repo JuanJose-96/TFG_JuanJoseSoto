@@ -30,7 +30,8 @@ public class ClientProfileController {
                                 request.surname(),
                                 request.phone(),
                                 request.province(),
-                                request.city())));
+                                request.city(),
+                                request.whatsappAvailable())));
 
     }
 

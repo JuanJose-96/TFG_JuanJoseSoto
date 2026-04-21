@@ -3,6 +3,7 @@ package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record RegisterClientRequest(
@@ -17,6 +18,7 @@ public record RegisterClientRequest(
         @Size(min = 8, message = "Password must be at least 8 characters")
         String password,
         @NotBlank(message = "Phone is required")
+        @Pattern(regexp = "^[0-9]{9}$",message ="Phone must be 9 digits")
         String phone,
         @NotBlank(message = "Province is required")
         String province,
