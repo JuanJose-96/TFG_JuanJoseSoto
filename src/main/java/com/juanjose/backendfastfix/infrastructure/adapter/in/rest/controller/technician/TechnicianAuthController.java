@@ -1,7 +1,9 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller.technician;
 
+import com.juanjose.backendfastfix.application.port.in.technician.LoginTechnicianUseCase;
 import com.juanjose.backendfastfix.application.port.in.technician.RegisterTechnicianUseCase;
 import com.juanjose.backendfastfix.domain.model.Technician;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.technician.LoginTechnicianRequest;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.technician.RegisterTechnicianRequest;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.technician.TechnicianResponse;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper.TechnicianRestMapper;
@@ -17,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/technician/auth")
 public class TechnicianAuthController {
     private final RegisterTechnicianUseCase registerTechnicianUseCase;
+    private final LoginTechnicianUseCase loginTechnicianUseCase;
 
-    public TechnicianAuthController(RegisterTechnicianUseCase registerTechnicianUseCase) {
+    public TechnicianAuthController(RegisterTechnicianUseCase registerTechnicianUseCase, LoginTechnicianUseCase loginTechnicianUseCase) {
         this.registerTechnicianUseCase = registerTechnicianUseCase;
+        this.loginTechnicianUseCase = loginTechnicianUseCase;
     }
 
     @PostMapping("/register")
@@ -29,6 +33,15 @@ public class TechnicianAuthController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(TechnicianRestMapper.fromDomain(technicianSaved));
+
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<TechnicianResponse> loginTechnician(@Valid @RequestBody LoginTechnicianRequest request){
+        Technician technician = loginTechnicianUseCase.login(request.email(), request.password());
+
+        return ResponseEntity
+                .ok(TechnicianRestMapper.fromDomain(technician));
 
     }
 }
