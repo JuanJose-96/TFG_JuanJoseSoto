@@ -7,7 +7,9 @@ import com.juanjose.backendfastfix.application.port.out.TechnicianRepositoryPort
 import com.juanjose.backendfastfix.domain.exception.EmailAlreadyExists;
 import com.juanjose.backendfastfix.domain.exception.SectorNotFoundException;
 import com.juanjose.backendfastfix.domain.model.Technician;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TechnicianAuthService implements RegisterTechnicianUseCase {
 
     private final TechnicianRepositoryPort technicianRepositoryPort;
@@ -26,7 +28,7 @@ public class TechnicianAuthService implements RegisterTechnicianUseCase {
         if(technicianRepositoryPort.existsByEmail(technician.getEmail())){
             throw new EmailAlreadyExists(technician.getEmail());
         }
-        if(sectorRepositoryPort.exitsById(technician.getMainSectorId())) {
+        if(!sectorRepositoryPort.exitsById(technician.getMainSectorId())) {
             throw new SectorNotFoundException(technician.getMainSectorId());
         }
 
