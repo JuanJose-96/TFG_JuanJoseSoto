@@ -1,7 +1,7 @@
 package com.juanjose.backendfastfix.application.service;
 
-import com.juanjose.backendfastfix.application.port.in.LoginClientUseCase;
-import com.juanjose.backendfastfix.application.port.in.RegisterClientUseCase;
+import com.juanjose.backendfastfix.application.port.in.client.LoginClientUseCase;
+import com.juanjose.backendfastfix.application.port.in.client.RegisterClientUseCase;
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.application.port.out.PasswordEncoderPort;
 import com.juanjose.backendfastfix.domain.exception.ClientNotFoundException;

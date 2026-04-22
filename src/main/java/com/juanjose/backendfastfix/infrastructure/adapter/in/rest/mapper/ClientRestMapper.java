@@ -1,8 +1,8 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper;
 
 import com.juanjose.backendfastfix.domain.model.Client;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.ClientResponse;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.RegisterClientRequest;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.client.ClientResponse;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.client.RegisterClientRequest;
 
 public class ClientRestMapper {
     public static Client clientRegistrationToDomain(RegisterClientRequest request){

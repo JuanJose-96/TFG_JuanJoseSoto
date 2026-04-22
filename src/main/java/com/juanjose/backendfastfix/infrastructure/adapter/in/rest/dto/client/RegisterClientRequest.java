@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto;
+package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.client;
 
 
 import jakarta.validation.constraints.Email;

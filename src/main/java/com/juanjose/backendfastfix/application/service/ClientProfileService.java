@@ -1,7 +1,7 @@
 package com.juanjose.backendfastfix.application.service;
 
-import com.juanjose.backendfastfix.application.port.in.UpdateClientProfileUseCase;
-import com.juanjose.backendfastfix.application.port.in.UploadClientImageUseCase;
+import com.juanjose.backendfastfix.application.port.in.client.UpdateClientProfileUseCase;
+import com.juanjose.backendfastfix.application.port.in.client.UploadClientImageUseCase;
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.application.port.out.ImageStoragePort;
 import com.juanjose.backendfastfix.domain.exception.ClientNotFoundException;

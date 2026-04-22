@@ -1,9 +1,9 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller;
 
-import com.juanjose.backendfastfix.application.port.in.UpdateClientProfileUseCase;
-import com.juanjose.backendfastfix.application.port.in.UploadClientImageUseCase;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.ClientResponse;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.UpdateClientProfileRequest;
+import com.juanjose.backendfastfix.application.port.in.client.UpdateClientProfileUseCase;
+import com.juanjose.backendfastfix.application.port.in.client.UploadClientImageUseCase;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.client.ClientResponse;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.client.UpdateClientProfileRequest;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper.ClientRestMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

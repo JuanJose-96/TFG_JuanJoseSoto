@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.application.port.in;
+package com.juanjose.backendfastfix.application.port.in.client;
 
 import com.juanjose.backendfastfix.domain.model.Client;
 import org.springframework.web.multipart.MultipartFile;

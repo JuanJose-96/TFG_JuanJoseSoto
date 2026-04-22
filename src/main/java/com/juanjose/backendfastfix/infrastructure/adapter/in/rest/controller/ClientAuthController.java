@@ -1,10 +1,10 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller;
 
-import com.juanjose.backendfastfix.application.port.in.LoginClientUseCase;
-import com.juanjose.backendfastfix.application.port.in.RegisterClientUseCase;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.ClientResponse;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.LoginClientRequest;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.RegisterClientRequest;
+import com.juanjose.backendfastfix.application.port.in.client.LoginClientUseCase;
+import com.juanjose.backendfastfix.application.port.in.client.RegisterClientUseCase;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.client.ClientResponse;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.client.LoginClientRequest;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.client.RegisterClientRequest;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper.ClientRestMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
