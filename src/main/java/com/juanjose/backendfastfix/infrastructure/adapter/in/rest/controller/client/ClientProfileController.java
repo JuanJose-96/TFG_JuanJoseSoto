@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller;
+package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller.client;
 
 import com.juanjose.backendfastfix.application.port.in.client.UpdateClientProfileUseCase;
 import com.juanjose.backendfastfix.application.port.in.client.UploadClientImageUseCase;

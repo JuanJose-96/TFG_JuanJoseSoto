@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository;
+package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository.client;
 
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.domain.model.Client;

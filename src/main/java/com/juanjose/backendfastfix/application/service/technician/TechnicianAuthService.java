@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.application.service;
+package com.juanjose.backendfastfix.application.service.technician;
 
 import com.juanjose.backendfastfix.application.port.in.technician.RegisterTechnicianUseCase;
 import com.juanjose.backendfastfix.application.port.out.PasswordEncoderPort;

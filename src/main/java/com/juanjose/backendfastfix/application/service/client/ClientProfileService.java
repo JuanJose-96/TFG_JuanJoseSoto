@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.application.service;
+package com.juanjose.backendfastfix.application.service.client;
 
 import com.juanjose.backendfastfix.application.port.in.client.UpdateClientProfileUseCase;
 import com.juanjose.backendfastfix.application.port.in.client.UploadClientImageUseCase;

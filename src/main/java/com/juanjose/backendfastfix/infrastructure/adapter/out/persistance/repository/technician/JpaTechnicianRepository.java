@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository;
+package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository.technician;
 
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.TechnicianEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

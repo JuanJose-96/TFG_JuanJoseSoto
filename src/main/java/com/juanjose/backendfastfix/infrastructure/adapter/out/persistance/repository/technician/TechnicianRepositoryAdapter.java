@@ -1,8 +1,7 @@
-package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository;
+package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository.technician;
 
 import com.juanjose.backendfastfix.application.port.out.TechnicianRepositoryPort;
 import com.juanjose.backendfastfix.domain.model.Technician;
-import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.TechnicianEntity;
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.mapper.TechnicianPersistenceMapper;
 import org.springframework.stereotype.Repository;
 

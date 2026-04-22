@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller;
+package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller.technician;
 
 import com.juanjose.backendfastfix.application.port.in.technician.RegisterTechnicianUseCase;
 import com.juanjose.backendfastfix.domain.model.Technician;
