@@ -28,9 +28,9 @@ public class Technician {
     @Builder.Default
     private boolean whatsappAvailable = true;
     @Builder.Default
-    private Double averageRating = 0.0;
+    private double averageRating = 0.0;
     @Builder.Default
-    private Integer totalReviews = 0;
+    private int totalReviews = 0;
 
 }
 
