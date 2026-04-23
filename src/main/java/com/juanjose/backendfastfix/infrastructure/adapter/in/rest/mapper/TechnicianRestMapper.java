@@ -3,6 +3,7 @@ package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper;
 import com.juanjose.backendfastfix.domain.model.Technician;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.technician.RegisterTechnicianRequest;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.technician.TechnicianResponse;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.technician.UpdateTechnicianProfileRequest;
 
 public class TechnicianRestMapper {
     public static Technician technicianRegistrationToDomain (RegisterTechnicianRequest request){
@@ -39,6 +40,23 @@ public class TechnicianRestMapper {
                 technician.getAverageRating(),
                 technician.getTotalReviews()
         );
+
+    }
+
+    public static Technician updateProfileToDomain(UpdateTechnicianProfileRequest request){
+        return  Technician.builder()
+                .name(request.name())
+                .surname(request.surname())
+                .phone(request.phone())
+                .province(request.province())
+                .city(request.city())
+                .aboutMe(request.aboutMe())
+                .mainSectorId(request.mainSector())
+                .priceDescription(request.priceDescription())
+                .emergencyAvailability(request.emergencyAvailability())
+                .scheduleAvailability(request.scheduleAvailability())
+                .whatsappAvailable(request.whatsappAvailable())
+                .build();
 
     }
 }

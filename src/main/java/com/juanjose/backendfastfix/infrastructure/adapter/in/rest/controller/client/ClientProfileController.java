@@ -37,7 +37,7 @@ public class ClientProfileController {
 
     @PostMapping("/{id}/image")
     public ResponseEntity<ClientResponse> uploadImage(@PathVariable Long id,
-                                                      @RequestParam("profileImage") MultipartFile file){
+                                                      @RequestParam("clientImage") MultipartFile file){
         return ResponseEntity.ok(ClientRestMapper.fromDomain(
                 uploadClientImageUseCase.uploadProfileImage(id,file)
         ));
