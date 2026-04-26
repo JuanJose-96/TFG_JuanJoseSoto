@@ -33,7 +33,7 @@ public class TechnicianProfileService implements UpdateTechnicianProfileUseCase,
                 .province(technician.getProvince())
                 .city(technician.getCity())
                 .aboutMe(technician.getAboutMe())
-                .mainSectorId(technician.getMainSectorId())
+                .sector(technicianFound.getSector())
                 .priceDescription(technician.getPriceDescription())
                 .emergencyAvailability(technician.isEmergencyAvailability())
                 .scheduleAvailability(technician.getScheduleAvailability())

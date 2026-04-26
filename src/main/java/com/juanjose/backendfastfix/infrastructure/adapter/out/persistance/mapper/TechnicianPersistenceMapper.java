@@ -1,29 +1,35 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.mapper;
 
+import com.juanjose.backendfastfix.domain.model.Sector;
 import com.juanjose.backendfastfix.domain.model.Technician;
+import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.SectorEntity;
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.TechnicianEntity;
 
 public class TechnicianPersistenceMapper {
     public static TechnicianEntity toEntity(Technician technician) {
-        TechnicianEntity entity = new TechnicianEntity();
-        entity.setId(technician.getId());
-        entity.setName(technician.getName());
-        entity.setSurname(technician.getSurname());
-        entity.setEmail(technician.getEmail());
-        entity.setPassword(technician.getPassword());
-        entity.setPhone(technician.getPhone());
-        entity.setProfileImageUrl(technician.getProfileImageUrl());
-        entity.setProvince(technician.getProvince());
-        entity.setCity(technician.getCity());
-        entity.setAboutMe(technician.getAboutMe());
-        entity.setMainSectorId(technician.getMainSectorId());
-        entity.setPriceDescription(technician.getPriceDescription());
-        entity.setEmergencyAvailability(technician.isEmergencyAvailability());
-        entity.setScheduleAvailability(technician.getScheduleAvailability());
-        entity.setWhatsappAvailable(technician.isWhatsappAvailable());
-        entity.setAverageRating(technician.getAverageRating());
-        entity.setTotalReviews(technician.getTotalReviews());
-        return entity;
+        SectorEntity sector = new SectorEntity();
+        sector.setId(technician.getSector().getId());
+        sector.setName(technician.getSector().getName());
+        return TechnicianEntity.builder()
+                .id(technician.getId())
+                .name(technician.getName())
+                .surname(technician.getSurname())
+                .email(technician.getEmail())
+                .password(technician.getPassword())
+                .phone(technician.getPhone())
+                .profileImageUrl(technician.getProfileImageUrl())
+                .province(technician.getProvince())
+                .city(technician.getCity())
+                .aboutMe(technician.getAboutMe())
+                .sectorEntity(sector)
+                .priceDescription(technician.getPriceDescription())
+                .emergencyAvailability(technician.isEmergencyAvailability())
+                .scheduleAvailability(technician.getScheduleAvailability())
+                .whatsappAvailable(technician.isWhatsappAvailable())
+                .averageRating(technician.getAverageRating())
+                .totalReviews(technician.getTotalReviews())
+                .build();
+
     }
     public static Technician toDomain(TechnicianEntity entity) {
         return Technician.builder()
@@ -37,7 +43,7 @@ public class TechnicianPersistenceMapper {
                 .province(entity.getProvince())
                 .city(entity.getCity())
                 .aboutMe(entity.getAboutMe())
-                .mainSectorId(entity.getMainSectorId())
+                .sector(new Sector(entity.getSectorEntity().getId(), entity.getSectorEntity().getName()))
                 .priceDescription(entity.getPriceDescription())
                 .emergencyAvailability(entity.isEmergencyAvailability())
                 .scheduleAvailability(entity.getScheduleAvailability())

@@ -23,8 +23,8 @@ public record UpdateTechnicianProfileRequest(
 
         String aboutMe,
 
-        @NotNull(message = "Main sector is required")
-        Long mainSector,
+        @NotNull(message = "Sector is required")
+        Long sectorId,
 
         String priceDescription,
 

@@ -1,16 +1,14 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Entity
 @Table(name= "technicians")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class TechnicianEntity {
@@ -44,8 +42,9 @@ public class TechnicianEntity {
     @Column(columnDefinition = "TEXT")
     private String aboutMe;
 
-    @Column(nullable = false)
-    private Long mainSectorId;
+    @ManyToOne
+    @JoinColumn(name = "main_sector_id", nullable = false)
+    private SectorEntity sectorEntity;
 
     private String priceDescription;
 
