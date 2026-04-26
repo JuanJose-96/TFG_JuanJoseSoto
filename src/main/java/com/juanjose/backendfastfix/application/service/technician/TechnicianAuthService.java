@@ -9,6 +9,7 @@ import com.juanjose.backendfastfix.domain.exception.EmailAlreadyExists;
 import com.juanjose.backendfastfix.domain.exception.InvalidPasswordException;
 import com.juanjose.backendfastfix.domain.exception.SectorNotFoundException;
 import com.juanjose.backendfastfix.domain.exception.TechnicianNotFoundException;
+import com.juanjose.backendfastfix.domain.model.Sector;
 import com.juanjose.backendfastfix.domain.model.Technician;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +32,11 @@ public class TechnicianAuthService implements RegisterTechnicianUseCase, LoginTe
         if(technicianRepositoryPort.existsByEmail(technician.getEmail())){
             throw new EmailAlreadyExists(technician.getEmail());
         }
-        if(!sectorRepositoryPort.exitsById(technician.getMainSectorId())) {
-            throw new SectorNotFoundException(technician.getMainSectorId());
-        }
+        Sector sector = sectorRepositoryPort.findById(technician.getSector().getId())
+                .orElseThrow(() -> new SectorNotFoundException(technician.getSector().getId()));
 
         Technician technicianToSave = technician.toBuilder()
+                .sector(sector)
                 .password(passwordEncoderPort.encode(technician.getPassword())).build();
 
         return technicianRepositoryPort.save(technicianToSave);
