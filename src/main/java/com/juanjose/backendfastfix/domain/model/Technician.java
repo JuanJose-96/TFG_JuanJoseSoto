@@ -20,7 +20,7 @@ public class Technician {
     private String province;
     private String city;
     private String aboutMe;
-    private Long mainSectorId;
+    private Sector sector;
     private String priceDescription;
     @Builder.Default
     private boolean emergencyAvailability = false;
