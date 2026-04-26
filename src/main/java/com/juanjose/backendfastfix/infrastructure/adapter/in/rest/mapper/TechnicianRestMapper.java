@@ -1,5 +1,6 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper;
 
+import com.juanjose.backendfastfix.domain.model.Sector;
 import com.juanjose.backendfastfix.domain.model.Technician;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.technician.RegisterTechnicianRequest;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.technician.TechnicianResponse;
@@ -16,7 +17,7 @@ public class TechnicianRestMapper {
                 .province(request.province())
                 .city(request.city())
                 .aboutMe(request.aboutMe())
-                .mainSectorId(request.mainSectorId())
+                .sector(new Sector(request.sectorId(),null))
                 .priceDescription(request.priceDescription())
                 .emergencyAvailability(request.emergencyAvailability())
                 .scheduleAvailability(request.scheduleAvailability())
@@ -32,7 +33,8 @@ public class TechnicianRestMapper {
                 technician.getProvince(),
                 technician.getCity(),
                 technician.getAboutMe(),
-                technician.getMainSectorId(),
+                technician.getSector().getId(),
+                technician.getSector().getName(),
                 technician.getPriceDescription(),
                 technician.isEmergencyAvailability(),
                 technician.getScheduleAvailability(),
@@ -51,7 +53,7 @@ public class TechnicianRestMapper {
                 .province(request.province())
                 .city(request.city())
                 .aboutMe(request.aboutMe())
-                .mainSectorId(request.mainSector())
+                .sector(new Sector(request.sectorId(),null))
                 .priceDescription(request.priceDescription())
                 .emergencyAvailability(request.emergencyAvailability())
                 .scheduleAvailability(request.scheduleAvailability())
