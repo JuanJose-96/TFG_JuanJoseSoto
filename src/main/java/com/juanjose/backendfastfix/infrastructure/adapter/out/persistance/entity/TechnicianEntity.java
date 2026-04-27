@@ -3,6 +3,9 @@ package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entit
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name= "technicians")
@@ -61,4 +64,7 @@ public class TechnicianEntity {
 
     @Column(nullable = false)
     private Integer totalReviews;
+
+    @OneToMany(mappedBy = "technicianEntity")
+    private List<ReviewEntity> reviews = new ArrayList<>();
 }

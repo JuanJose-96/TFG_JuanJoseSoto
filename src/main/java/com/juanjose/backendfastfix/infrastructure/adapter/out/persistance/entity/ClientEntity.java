@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "clients")
 @Getter
@@ -34,6 +37,8 @@ public class ClientEntity {
     private String city;
     @Column(nullable = false)
     private boolean whatsappAvailable;
+    @OneToMany(mappedBy = "clientEntity")
+    private List<ReviewEntity> reviews = new ArrayList<>();
 
 
 }
