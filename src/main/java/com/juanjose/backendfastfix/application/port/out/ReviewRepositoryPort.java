@@ -10,5 +10,5 @@ public interface ReviewRepositoryPort {
     Optional<Review> findById(Long id);
     List<Review> findByTechnicianId(Long technicianId);
     List<Review> findByClientId(Long clientId);
-    boolean existsByClientAndTechnicianId(Long clientId, Long TechnicianId);
+    boolean existsByClientAndTechnicianId(Long clientId, Long technicianId);
 }
