@@ -3,13 +3,11 @@ package com.juanjose.backendfastfix.application.service;
 import com.juanjose.backendfastfix.application.port.in.review.GetClientReviewsUseCase;
 import com.juanjose.backendfastfix.application.port.in.review.GetTechnicianReviewsUseCase;
 import com.juanjose.backendfastfix.application.port.in.review.PublishReviewUseCase;
+import com.juanjose.backendfastfix.application.port.in.review.ReplyReviewUseCase;
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.application.port.out.ReviewRepositoryPort;
 import com.juanjose.backendfastfix.application.port.out.TechnicianRepositoryPort;
-import com.juanjose.backendfastfix.domain.exception.ClientNotFoundException;
-import com.juanjose.backendfastfix.domain.exception.InvalidRatingException;
-import com.juanjose.backendfastfix.domain.exception.ReviewAlreadyExistsException;
-import com.juanjose.backendfastfix.domain.exception.TechnicianNotFoundException;
+import com.juanjose.backendfastfix.domain.exception.*;
 import com.juanjose.backendfastfix.domain.model.Review;
 import com.juanjose.backendfastfix.domain.model.Technician;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class ReviewService implements PublishReviewUseCase, GetClientReviewsUseCase, GetTechnicianReviewsUseCase {
+public class ReviewService implements PublishReviewUseCase,
+        GetClientReviewsUseCase, GetTechnicianReviewsUseCase, ReplyReviewUseCase {
+
     private final ClientRepositoryPort clientRepositoryPort;
     private final ReviewRepositoryPort reviewRepositoryPort;
     private final TechnicianRepositoryPort technicianRepositoryPort;
@@ -68,8 +68,11 @@ public class ReviewService implements PublishReviewUseCase, GetClientReviewsUseC
                 .comment(comment)
                 .createdAt(LocalDateTime.now()).build();
 
-        updateTechnicianRating(technician);
-        return reviewRepositoryPort.save(review);
+       Review savedReview = reviewRepositoryPort.save(review);
+       updateTechnicianRating(technician);
+       return savedReview;
+
+
 
     }
 
@@ -87,5 +90,21 @@ public class ReviewService implements PublishReviewUseCase, GetClientReviewsUseC
 
         technicianRepositoryPort.save(updateTechnician);
 
+    }
+
+    @Override
+    public Review reply(Long reviewId, Long technicianId, String technicianReply) {
+        Review review = reviewRepositoryPort.findById(reviewId)
+                .orElseThrow(() -> new ReviewNotFoundException(reviewId));
+
+        if(!review.getTechnicianId().equals(technicianId)){
+            throw new TechnicianNotFoundException(technicianId);
+        }
+        Review updatedReview = review.toBuilder()
+                .technicianReply(technicianReply)
+                .technicianReplyDate(LocalDateTime.now())
+                .build();
+
+        return reviewRepositoryPort.save(updatedReview);
     }
 }
