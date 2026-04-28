@@ -149,6 +149,18 @@ public class GlobalHandlerException {
                 ));
 
     }
+
+    @ExceptionHandler(UnauthorizedReviewAccessException.class)
+    public ResponseEntity<ApiErrorResponse>handleUnauthorizedReviewAccess(UnauthorizedReviewAccessException ex){
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(new ApiErrorResponse(
+                        HttpStatus.FORBIDDEN.value(),
+                        "Forbidden",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                ));
+
+    }
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<ApiErrorResponse> handleDomainException(DomainException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
