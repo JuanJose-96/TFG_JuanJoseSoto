@@ -29,7 +29,7 @@ public class ReviewEntity {
     @Column(nullable = false)
     private int rating;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String comment;
 
     @Column(columnDefinition = "TEXT")

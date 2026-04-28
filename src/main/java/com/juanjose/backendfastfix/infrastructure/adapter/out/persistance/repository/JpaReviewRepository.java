@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface JpaReviewRepository extends JpaRepository<ReviewEntity,Long> {
-    List<ReviewEntity> findByTechnicianId(Long technicianId);
-    List<ReviewEntity> findByClientId(Long clientId);
-    boolean existsByClientIdAndTechnicianId(Long clientId, Long TechnicianId);
+    List<ReviewEntity> findByTechnicianEntity_Id(Long technicianId);
+    List<ReviewEntity> findByClientEntity_Id(Long clientId);
+    boolean existsByClientEntity_IdAndTechnicianEntity_Id(Long clientId, Long TechnicianId);
 }

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class GlobalHandlerClientException {
+public class GlobalHandlerException {
 
     @ExceptionHandler(EmailAlreadyExists.class)
     public ResponseEntity <ApiErrorResponse> handleEmailAlreadyExists(EmailAlreadyExists ex){
@@ -28,16 +28,7 @@ public class GlobalHandlerClientException {
                 ));
 
     }
-    @ExceptionHandler(DomainException.class)
-    public ResponseEntity<ApiErrorResponse> handleDomainException(DomainException ex){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ApiErrorResponse(
-                        HttpStatus.BAD_REQUEST.value(),
-                        "Bad request",
-                        ex.getMessage(),
-                        LocalDateTime.now().toString()
-                ));
-    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationErrorResponse> handleValidationException(MethodArgumentNotValidException ex){
@@ -91,6 +82,75 @@ public class GlobalHandlerClientException {
 
     @ExceptionHandler(InvalidFileException.class)
     public ResponseEntity<ApiErrorResponse> handleInvalidFile(InvalidFileException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ApiErrorResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        "Bad request",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                ));
+    }
+    @ExceptionHandler(TechnicianNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleTechnicianNotFound(TechnicianNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                new ApiErrorResponse(
+                        HttpStatus.NOT_FOUND.value(),
+                        "Not found",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                )
+        );
+    }
+
+    @ExceptionHandler(SectorNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleSectorNotFound(SectorNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                new ApiErrorResponse(
+                        HttpStatus.NOT_FOUND.value(),
+                        "Not found",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                )
+        );
+    }
+
+    @ExceptionHandler(ReviewAlreadyExistsException.class)
+    public ResponseEntity<ApiErrorResponse> handleReviewAlreadyExists(ReviewAlreadyExistsException ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ApiErrorResponse(
+                        HttpStatus.CONFLICT.value(),
+                        "Conflict",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                ));
+
+    }
+
+    @ExceptionHandler(ReviewNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleReviewNotFound(ReviewNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiErrorResponse(
+                        HttpStatus.NOT_FOUND.value(),
+                        "Not found",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                ));
+
+    }
+
+    @ExceptionHandler(InvalidRatingException.class)
+    public ResponseEntity<ApiErrorResponse> handleInvalidRating(InvalidRatingException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ApiErrorResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        "Not found",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                ));
+
+    }
+    @ExceptionHandler(DomainException.class)
+    public ResponseEntity<ApiErrorResponse> handleDomainException(DomainException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ApiErrorResponse(
                         HttpStatus.BAD_REQUEST.value(),

@@ -1,10 +1,9 @@
-package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository.technician;
+package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository;
 
 import com.juanjose.backendfastfix.application.port.out.ReviewRepositoryPort;
 import com.juanjose.backendfastfix.domain.model.Review;
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.ReviewEntity;
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.mapper.ReviewPersistenceMapper;
-import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository.JpaReviewRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,19 +31,19 @@ public class ReviewRepositoryAdapter implements ReviewRepositoryPort {
 
     @Override
     public List<Review> findByTechnicianId(Long technicianId) {
-        return jpaReviewRepository.findByTechnicianId(technicianId).stream()
+        return jpaReviewRepository.findByTechnicianEntity_Id(technicianId).stream()
                 .map(ReviewPersistenceMapper::toDomain).toList();
     }
 
     @Override
     public List<Review> findByClientId(Long clientId) {
-        return jpaReviewRepository.findByClientId(clientId).stream()
+        return jpaReviewRepository.findByClientEntity_Id(clientId).stream()
                 .map(ReviewPersistenceMapper::toDomain).toList();
     }
 
     @Override
     public boolean existsByClientAndTechnicianId(Long clientId, Long technicianId) {
-        return jpaReviewRepository.existsByClientIdAndTechnicianId(clientId,technicianId);
+        return jpaReviewRepository.existsByClientEntity_IdAndTechnicianEntity_Id(clientId,technicianId);
     }
 
 
