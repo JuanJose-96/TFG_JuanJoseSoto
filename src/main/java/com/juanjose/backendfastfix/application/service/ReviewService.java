@@ -1,9 +1,6 @@
 package com.juanjose.backendfastfix.application.service;
 
-import com.juanjose.backendfastfix.application.port.in.review.GetClientReviewsUseCase;
-import com.juanjose.backendfastfix.application.port.in.review.GetTechnicianReviewsUseCase;
-import com.juanjose.backendfastfix.application.port.in.review.PublishReviewUseCase;
-import com.juanjose.backendfastfix.application.port.in.review.ReplyReviewUseCase;
+import com.juanjose.backendfastfix.application.port.in.review.*;
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.application.port.out.ReviewRepositoryPort;
 import com.juanjose.backendfastfix.application.port.out.TechnicianRepositoryPort;
@@ -17,7 +14,8 @@ import java.util.List;
 
 @Service
 public class ReviewService implements PublishReviewUseCase,
-        GetClientReviewsUseCase, GetTechnicianReviewsUseCase, ReplyReviewUseCase {
+        GetClientReviewsUseCase, GetTechnicianReviewsUseCase,
+        ReplyReviewUseCase, EditReviewUseCase {
 
     private final ClientRepositoryPort clientRepositoryPort;
     private final ReviewRepositoryPort reviewRepositoryPort;
@@ -106,5 +104,26 @@ public class ReviewService implements PublishReviewUseCase,
                 .build();
 
         return reviewRepositoryPort.save(updatedReview);
+    }
+
+    @Override
+    public Review edit(Long reviewId, Long clientId, Integer newRating, String newComment) {
+        Review review = reviewRepositoryPort.findById(reviewId)
+                .orElseThrow(()-> new ReviewNotFoundException(reviewId));
+        if(!review.getClientId().equals(clientId)){
+            throw new UnauthorizedReviewAccessException();
+        }
+
+        Review updatedReview = review.toBuilder()
+                .rating(newRating != null ? newRating : review.getRating())
+                .comment(newComment != null ? newComment : review.getComment())
+                .build();
+
+        Review savedReview = reviewRepositoryPort.save(updatedReview);
+        Technician technician = technicianRepositoryPort.findById(review.getTechnicianId())
+                .orElseThrow(() -> new TechnicianNotFoundException(review.getTechnicianId()));
+
+        updateTechnicianRating(technician);
+        return savedReview;
     }
 }
