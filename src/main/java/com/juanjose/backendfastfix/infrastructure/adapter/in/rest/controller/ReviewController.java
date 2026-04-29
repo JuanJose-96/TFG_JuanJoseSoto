@@ -1,10 +1,8 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller;
 
-import com.juanjose.backendfastfix.application.port.in.review.GetClientReviewsUseCase;
-import com.juanjose.backendfastfix.application.port.in.review.GetTechnicianReviewsUseCase;
-import com.juanjose.backendfastfix.application.port.in.review.PublishReviewUseCase;
-import com.juanjose.backendfastfix.application.port.in.review.ReplyReviewUseCase;
+import com.juanjose.backendfastfix.application.port.in.review.*;
 import com.juanjose.backendfastfix.domain.model.Review;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.review.EditReviewRequest;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.review.PublishReviewRequest;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.review.ReplyReviewRequest;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.review.ReviewResponse;
@@ -23,12 +21,14 @@ public class ReviewController {
     private final GetClientReviewsUseCase getClientReviewsUseCase;
     private final GetTechnicianReviewsUseCase getTechnicianReviewsUseCase;
     private final ReplyReviewUseCase replyReviewUseCase;
+    private final EditReviewUseCase editReviewUseCase;
 
-    public ReviewController(PublishReviewUseCase publishReviewUseCase, GetClientReviewsUseCase getClientReviewsUseCase, GetTechnicianReviewsUseCase getTechnicianReviewsUseCase, ReplyReviewUseCase replyReviewUseCase) {
+    public ReviewController(PublishReviewUseCase publishReviewUseCase, GetClientReviewsUseCase getClientReviewsUseCase, GetTechnicianReviewsUseCase getTechnicianReviewsUseCase, ReplyReviewUseCase replyReviewUseCase, EditReviewUseCase editReviewUseCase) {
         this.publishReviewUseCase = publishReviewUseCase;
         this.getClientReviewsUseCase = getClientReviewsUseCase;
         this.getTechnicianReviewsUseCase = getTechnicianReviewsUseCase;
         this.replyReviewUseCase = replyReviewUseCase;
+        this.editReviewUseCase = editReviewUseCase;
     }
 
     @PostMapping
@@ -73,6 +73,18 @@ public class ReviewController {
         );
 
         return ResponseEntity.ok(ReviewRestMapper.fromDomain(updateReview));
+    }
+
+    @PatchMapping("/{reviewId}")
+    public ResponseEntity<ReviewResponse> edit(@PathVariable Long reviewId,
+                                               @Valid @RequestBody EditReviewRequest request){
+        Review updatedReview = editReviewUseCase.edit(
+                reviewId,
+                request.clientId(),
+                request.rating(),
+                request.comment());
+
+        return ResponseEntity.ok(ReviewRestMapper.fromDomain(updatedReview));
 
     }
 }
