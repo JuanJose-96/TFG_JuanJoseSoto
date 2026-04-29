@@ -8,8 +8,8 @@ public record EditReviewRequest(
         @NotNull(message = "Client id is required")
         Long clientId,
 
-        @Max(value = 1, message ="Rating must be at least 1")
-        @Min(value = 5, message = "Rating must be at most 5")
+        @Min(value = 1, message ="Rating must be at least 1")
+        @Max(value = 5, message = "Rating must be at most 5")
         Integer rating,
 
         String comment
