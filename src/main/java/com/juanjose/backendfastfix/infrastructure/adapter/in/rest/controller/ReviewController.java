@@ -2,10 +2,7 @@ package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller;
 
 import com.juanjose.backendfastfix.application.port.in.review.*;
 import com.juanjose.backendfastfix.domain.model.Review;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.review.EditReviewRequest;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.review.PublishReviewRequest;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.review.ReplyReviewRequest;
-import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.review.ReviewResponse;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.review.*;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper.ReviewRestMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -22,13 +19,15 @@ public class ReviewController {
     private final GetTechnicianReviewsUseCase getTechnicianReviewsUseCase;
     private final ReplyReviewUseCase replyReviewUseCase;
     private final EditReviewUseCase editReviewUseCase;
+    private final DeleteReviewUseCase deleteReviewUseCase;
 
-    public ReviewController(PublishReviewUseCase publishReviewUseCase, GetClientReviewsUseCase getClientReviewsUseCase, GetTechnicianReviewsUseCase getTechnicianReviewsUseCase, ReplyReviewUseCase replyReviewUseCase, EditReviewUseCase editReviewUseCase) {
+    public ReviewController(PublishReviewUseCase publishReviewUseCase, GetClientReviewsUseCase getClientReviewsUseCase, GetTechnicianReviewsUseCase getTechnicianReviewsUseCase, ReplyReviewUseCase replyReviewUseCase, EditReviewUseCase editReviewUseCase, DeleteReviewUseCase deleteReviewUseCase) {
         this.publishReviewUseCase = publishReviewUseCase;
         this.getClientReviewsUseCase = getClientReviewsUseCase;
         this.getTechnicianReviewsUseCase = getTechnicianReviewsUseCase;
         this.replyReviewUseCase = replyReviewUseCase;
         this.editReviewUseCase = editReviewUseCase;
+        this.deleteReviewUseCase = deleteReviewUseCase;
     }
 
     @PostMapping
@@ -85,6 +84,15 @@ public class ReviewController {
                 request.comment());
 
         return ResponseEntity.ok(ReviewRestMapper.fromDomain(updatedReview));
+
+    }
+
+    @DeleteMapping("/{reviewId}")
+    public ResponseEntity<Void> delete(@PathVariable Long reviewId,
+                                                 @Valid @RequestBody DeleteReviewRequest request){
+        deleteReviewUseCase.delete(reviewId,request.clientId());
+
+        return ResponseEntity.ok().build();
 
     }
 }
