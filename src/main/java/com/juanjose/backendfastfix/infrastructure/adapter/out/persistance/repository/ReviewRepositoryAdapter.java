@@ -46,5 +46,10 @@ public class ReviewRepositoryAdapter implements ReviewRepositoryPort {
         return jpaReviewRepository.existsByClientEntity_IdAndTechnicianEntity_Id(clientId,technicianId);
     }
 
+    @Override
+    public void deleteById(Long id) {
+        jpaReviewRepository.deleteById(id);
+    }
+
 
 }
