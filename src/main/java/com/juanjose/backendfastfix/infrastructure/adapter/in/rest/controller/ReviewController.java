@@ -20,14 +20,16 @@ public class ReviewController {
     private final ReplyReviewUseCase replyReviewUseCase;
     private final EditReviewUseCase editReviewUseCase;
     private final DeleteReviewUseCase deleteReviewUseCase;
+    private final DeleteReplyUseCase deleteReplyUseCase;
 
-    public ReviewController(PublishReviewUseCase publishReviewUseCase, GetClientReviewsUseCase getClientReviewsUseCase, GetTechnicianReviewsUseCase getTechnicianReviewsUseCase, ReplyReviewUseCase replyReviewUseCase, EditReviewUseCase editReviewUseCase, DeleteReviewUseCase deleteReviewUseCase) {
+    public ReviewController(PublishReviewUseCase publishReviewUseCase, GetClientReviewsUseCase getClientReviewsUseCase, GetTechnicianReviewsUseCase getTechnicianReviewsUseCase, ReplyReviewUseCase replyReviewUseCase, EditReviewUseCase editReviewUseCase, DeleteReviewUseCase deleteReviewUseCase, DeleteReplyUseCase deleteReplyUseCase) {
         this.publishReviewUseCase = publishReviewUseCase;
         this.getClientReviewsUseCase = getClientReviewsUseCase;
         this.getTechnicianReviewsUseCase = getTechnicianReviewsUseCase;
         this.replyReviewUseCase = replyReviewUseCase;
         this.editReviewUseCase = editReviewUseCase;
         this.deleteReviewUseCase = deleteReviewUseCase;
+        this.deleteReplyUseCase = deleteReplyUseCase;
     }
 
     @PostMapping
@@ -93,6 +95,14 @@ public class ReviewController {
         deleteReviewUseCase.delete(reviewId,request.clientId());
 
         return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{reviewId}/reply")
+    public ResponseEntity<ReviewResponse> deleteReply(@PathVariable Long reviewId,
+                                                      @Valid @RequestBody DeleteReplyRequest request){
+        Review reviewReplyDeleted = deleteReplyUseCase.deleteReply(reviewId,request.technicianId());
+
+        return ResponseEntity.ok(ReviewRestMapper.fromDomain(reviewReplyDeleted));
 
     }
 }
