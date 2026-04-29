@@ -15,7 +15,8 @@ import java.util.List;
 @Service
 public class ReviewService implements PublishReviewUseCase,
         GetClientReviewsUseCase, GetTechnicianReviewsUseCase,
-        ReplyReviewUseCase, EditReviewUseCase, DeleteReviewUseCase {
+        ReplyReviewUseCase, EditReviewUseCase, DeleteReviewUseCase,
+        DeleteReplyUseCase {
 
     private final ClientRepositoryPort clientRepositoryPort;
     private final ReviewRepositoryPort reviewRepositoryPort;
@@ -142,4 +143,21 @@ public class ReviewService implements PublishReviewUseCase,
 
         updateTechnicianRating(technician);
     }
+
+    @Override
+    public Review deleteReply(Long reviewId, Long technicianId) {
+        Review review = reviewRepositoryPort.findById(reviewId)
+                .orElseThrow(() -> new ReviewNotFoundException(reviewId));
+
+        if(!review.getTechnicianId().equals(technicianId)){
+            throw new UnauthorizedReviewAccessException();
+        }
+        Review updatedReview = review.toBuilder()
+                .technicianReply(null)
+                .technicianReplyDate(null)
+                .build();
+        return reviewRepositoryPort.save(updatedReview);
+    }
+
+
 }
