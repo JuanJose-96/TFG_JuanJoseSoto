@@ -6,6 +6,7 @@ import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.mapper.ClientPersistenceMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -38,6 +39,11 @@ public class ClientRepositoryAdapter implements ClientRepositoryPort {
     @Override
     public Optional<Client> findById(Long id) {
         return jpaClientRepository.findById(id).map(clientEntity -> ClientPersistenceMapper.toDomain(clientEntity));
+    }
+
+    @Override
+    public List<Client> searchClients(String name, String province, String city) {
+        return List.of();
     }
 
 
