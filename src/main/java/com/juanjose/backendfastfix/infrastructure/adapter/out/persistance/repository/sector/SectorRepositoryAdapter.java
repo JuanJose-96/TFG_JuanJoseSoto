@@ -1,8 +1,7 @@
-package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository;
+package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository.sector;
 
 import com.juanjose.backendfastfix.application.port.out.SectorRepositoryPort;
 import com.juanjose.backendfastfix.domain.model.Sector;
-import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.SectorEntity;
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.mapper.SectorMapper;
 import org.springframework.stereotype.Repository;
 

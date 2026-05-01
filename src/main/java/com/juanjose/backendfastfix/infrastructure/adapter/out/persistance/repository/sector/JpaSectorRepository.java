@@ -1,4 +1,4 @@
-package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository;
+package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository.sector;
 
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.SectorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
