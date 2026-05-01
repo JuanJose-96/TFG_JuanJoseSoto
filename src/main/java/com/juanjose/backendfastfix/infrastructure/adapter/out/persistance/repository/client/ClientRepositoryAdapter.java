@@ -4,8 +4,11 @@ import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.domain.model.Client;
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.ClientEntity;
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.mapper.ClientPersistenceMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -32,12 +35,29 @@ public class ClientRepositoryAdapter implements ClientRepositoryPort {
     @Override
     public Optional<Client> findByEmail(String email) {
         return jpaClientRepository.findByEmail(email)
-                .map(clientEntity -> ClientPersistenceMapper.toDomain(clientEntity));
+                .map(ClientPersistenceMapper::toDomain);
     }
 
     @Override
     public Optional<Client> findById(Long id) {
-        return jpaClientRepository.findById(id).map(clientEntity -> ClientPersistenceMapper.toDomain(clientEntity));
+        return jpaClientRepository.findById(id).map(ClientPersistenceMapper::toDomain);
+    }
+
+    @Override
+    public List<Client> searchClients(String name, String province, String city) {
+        Pageable pageable = PageRequest.of(0,20);
+
+        String namePattern= startsWithPattern(name);
+
+        return jpaClientRepository.searchClients(namePattern,province,city,pageable)
+                .stream().map(ClientPersistenceMapper::toDomain).toList();
+    }
+
+    private String startsWithPattern(String name){
+        if(name == null || name.isBlank()){
+            return name;
+        }
+        return name.trim().toLowerCase() + '%';
     }
 
 
