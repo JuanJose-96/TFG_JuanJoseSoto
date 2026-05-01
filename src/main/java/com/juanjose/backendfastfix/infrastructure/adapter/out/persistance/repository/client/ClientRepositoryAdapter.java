@@ -45,10 +45,19 @@ public class ClientRepositoryAdapter implements ClientRepositoryPort {
 
     @Override
     public List<Client> searchClients(String name, String province, String city) {
-        Pageable pageable = PageRequest.of(20,0);
+        Pageable pageable = PageRequest.of(0,20);
 
-        return jpaClientRepository.searchClients(name,province,city,pageable)
+        String namePattern= startsWithPattern(name);
+
+        return jpaClientRepository.searchClients(namePattern,province,city,pageable)
                 .stream().map(ClientPersistenceMapper::toDomain).toList();
+    }
+
+    private String startsWithPattern(String name){
+        if(name == null || name.isBlank()){
+            return name;
+        }
+        return name.trim().toLowerCase() + '%';
     }
 
 

@@ -16,7 +16,7 @@ public interface JpaClientRepository extends JpaRepository<ClientEntity,Long> {
     @Query("SELECT c FROM ClientEntity c WHERE " +
             "(:province IS NULL OR c.province = :province  ) AND " +
             "(:city IS NULL OR c.city = :city) AND" +
-            "(:name IS NULL OR LOWER(c.name) LIKE LOWER(CONCAT(:name, '%')))")
+            "(:name IS NULL OR LOWER(c.name) LIKE :name)")
     List<ClientEntity> searchClients(@Param("name") String name,
                                      @Param("province") String province,
                                      @Param("city") String city, Pageable pageable);
