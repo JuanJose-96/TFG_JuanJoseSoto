@@ -1,5 +1,6 @@
 package com.juanjose.backendfastfix.application.service.technician;
 
+import com.juanjose.backendfastfix.application.port.in.technician.GetTechnicianProfileUseCase;
 import com.juanjose.backendfastfix.application.port.in.technician.UpdateTechnicianProfileUseCase;
 import com.juanjose.backendfastfix.application.port.in.technician.UploadTechnicianImageUseCase;
 import com.juanjose.backendfastfix.application.port.out.ImageStoragePort;
@@ -12,7 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class TechnicianProfileService implements UpdateTechnicianProfileUseCase, UploadTechnicianImageUseCase {
+public class TechnicianProfileService implements UpdateTechnicianProfileUseCase,
+        UploadTechnicianImageUseCase, GetTechnicianProfileUseCase {
     private final TechnicianRepositoryPort technicianRepositoryPort;
     private final ImageStoragePort imageStoragePort;
 
@@ -63,5 +65,13 @@ public class TechnicianProfileService implements UpdateTechnicianProfileUseCase,
         String imageUrl = imageStoragePort.uploadImage(file);
         Technician technicianImage = technician.toBuilder().profileImageUrl(imageUrl).build();
         return technicianRepositoryPort.save(technicianImage);
+    }
+
+    @Override
+    public Technician getProfile(Long id) {
+        return technicianRepositoryPort.findById(id)
+                .orElseThrow(() -> new TechnicianNotFoundException(id));
+
+
     }
 }
