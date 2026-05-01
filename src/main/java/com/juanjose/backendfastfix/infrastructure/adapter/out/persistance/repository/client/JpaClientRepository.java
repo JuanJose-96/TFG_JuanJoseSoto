@@ -1,11 +1,12 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository.client;
 
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.ClientEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.awt.print.Pageable;
+
 import java.util.List;
 import java.util.Optional;
 
