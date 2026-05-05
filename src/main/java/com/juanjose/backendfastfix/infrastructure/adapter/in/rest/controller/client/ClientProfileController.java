@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("api/client/profile")
+@RequestMapping("/client/profile")
 public class ClientProfileController {
     private final UpdateClientProfileUseCase updateClientProfileUseCase;
     private final UploadClientImageUseCase uploadClientImageUseCase;

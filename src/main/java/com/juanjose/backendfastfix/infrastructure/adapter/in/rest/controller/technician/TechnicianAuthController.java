@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/technician/auth")
+@RequestMapping("/technician/auth")
 public class TechnicianAuthController {
     private final RegisterTechnicianUseCase registerTechnicianUseCase;
     private final LoginTechnicianUseCase loginTechnicianUseCase;

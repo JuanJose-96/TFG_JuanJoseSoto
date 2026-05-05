@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/api/technician/profile")
+@RequestMapping("/technician/profile")
 public class TechnicianProfileController {
     private final UpdateTechnicianProfileUseCase updateTechnicianProfileUseCase;
     private final UploadTechnicianImageUseCase uploadTechnicianImageUseCase;
