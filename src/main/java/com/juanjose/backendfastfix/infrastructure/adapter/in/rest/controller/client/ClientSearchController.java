@@ -1,7 +1,6 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller.client;
 
 import com.juanjose.backendfastfix.application.port.in.client.SearchClientsUseCase;
-import com.juanjose.backendfastfix.domain.model.Client;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.client.ClientResponse;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper.ClientRestMapper;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/clients/search")
+@RequestMapping("/clients/search")
 public class ClientSearchController {
     private final SearchClientsUseCase searchClientsUseCase;
 

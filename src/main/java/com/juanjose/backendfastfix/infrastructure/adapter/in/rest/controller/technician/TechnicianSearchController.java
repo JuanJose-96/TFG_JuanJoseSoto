@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/technicians/search")
+@RequestMapping("/technicians/search")
 public class TechnicianSearchController {
     private final SearchTechniciansUseCase searchTechniciansUseCase;
 
