@@ -31,4 +31,22 @@ public class CloudinaryImageStorageAdapter implements ImageStoragePort {
             throw new ImageUploadException("Error uploading image");
         }
     }
+
+    @Override
+    public void deleteImage(String imageUrl) {
+        try{
+            String publicId =extractPublicId(imageUrl);
+            cloudinary.uploader().destroy(publicId,ObjectUtils.emptyMap());
+
+        }catch(IOException e){
+            throw new ImageUploadException("Error deleting image");
+        }
+    }
+
+    private String extractPublicId(String imageUrl){
+        String[]parts =imageUrl.split("/upload/");
+        String afterUpload = parts[1];
+        String withoutVersion = afterUpload.substring(afterUpload.indexOf("/")+1);
+        return withoutVersion.substring(0,withoutVersion.lastIndexOf("."));
+    }
 }
