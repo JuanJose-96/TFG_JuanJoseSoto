@@ -62,7 +62,7 @@ public class WorkService implements CreateAWorkUseCase, EditWorkUseCase,
 
     @Override
     public List<Work> getByTechnicianId(Long technicianId) {
-        workRepositoryPort.findById(technicianId)
+        technicianRepositoryPort.findById(technicianId)
                 .orElseThrow(() -> new TechnicianNotFoundException(technicianId));
 
         return workRepositoryPort.findByTechnicianId(technicianId);

@@ -22,7 +22,7 @@ public class WorkEntity {
     @JoinColumn(name = "technician_id",nullable = false)
     private TechnicianEntity technician;
 
-    @Column(nullable = false)
+
     private Long clientId;
 
     @Column(nullable = false)

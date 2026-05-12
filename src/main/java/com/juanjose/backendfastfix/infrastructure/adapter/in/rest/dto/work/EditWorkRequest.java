@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public record EditWorkRequest(
         @NotNull(message = "Technician id is required")
         Long technicianId,
-        @NotNull(message = "Client id is required")
+
         Long clientId,
 
         @NotBlank(message = "Client name is required")
