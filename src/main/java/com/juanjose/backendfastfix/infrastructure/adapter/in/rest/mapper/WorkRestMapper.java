@@ -2,6 +2,7 @@ package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper;
 
 import com.juanjose.backendfastfix.domain.model.Work;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.work.CreateWorkRequest;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.work.EditWorkRequest;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.work.WorkResponse;
 
 public class WorkRestMapper {
@@ -32,5 +33,18 @@ public class WorkRestMapper {
                 work.getTotalAmount(),
                 work.getServiceDescription()
         );
+    }
+
+    public static Work editToDomain(EditWorkRequest request){
+        return Work.builder()
+                .clientId(request.clientId())
+                .clientName(request.clientName())
+                .clientSurname(request.clientSurname())
+                .clientProvince(request.clientProvince())
+                .clientCity(request.clientCity())
+                .serviceDate(request.serviceDate())
+                .totalAmount(request.totalAmount())
+                .serviceDescription(request.serviceDescription())
+                .build();
     }
 }
