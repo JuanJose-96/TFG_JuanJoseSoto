@@ -1,5 +1,6 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller.technician;
 
+import com.juanjose.backendfastfix.application.port.in.technician.DeleteTechnicianImageUseCase;
 import com.juanjose.backendfastfix.application.port.in.technician.GetTechnicianProfileUseCase;
 import com.juanjose.backendfastfix.application.port.in.technician.UpdateTechnicianProfileUseCase;
 import com.juanjose.backendfastfix.application.port.in.technician.UploadTechnicianImageUseCase;
@@ -18,11 +19,13 @@ public class TechnicianProfileController {
     private final UpdateTechnicianProfileUseCase updateTechnicianProfileUseCase;
     private final UploadTechnicianImageUseCase uploadTechnicianImageUseCase;
     private final GetTechnicianProfileUseCase getTechnicianProfileUseCase;
+    private final DeleteTechnicianImageUseCase deleteTechnicianImageUseCase;
 
-    public TechnicianProfileController(UpdateTechnicianProfileUseCase updateTechnicianProfileUseCase, UploadTechnicianImageUseCase uploadTechnicianImageUseCase, GetTechnicianProfileUseCase getTechnicianProfileUseCase) {
+    public TechnicianProfileController(UpdateTechnicianProfileUseCase updateTechnicianProfileUseCase, UploadTechnicianImageUseCase uploadTechnicianImageUseCase, GetTechnicianProfileUseCase getTechnicianProfileUseCase, DeleteTechnicianImageUseCase deleteTechnicianImageUseCase) {
         this.updateTechnicianProfileUseCase = updateTechnicianProfileUseCase;
         this.uploadTechnicianImageUseCase = uploadTechnicianImageUseCase;
         this.getTechnicianProfileUseCase = getTechnicianProfileUseCase;
+        this.deleteTechnicianImageUseCase = deleteTechnicianImageUseCase;
     }
 
     @PutMapping("/{id}")
@@ -46,6 +49,14 @@ public class TechnicianProfileController {
         Technician technician = getTechnicianProfileUseCase.getProfile(id);
 
         return ResponseEntity.ok(TechnicianRestMapper.fromDomain(technician));
+
+    }
+
+    @DeleteMapping("/{id}/image")
+    public ResponseEntity<TechnicianResponse> deleteImage(@PathVariable Long id){
+        Technician tech = deleteTechnicianImageUseCase.deleteProfileImage(id);
+
+        return ResponseEntity.ok(TechnicianRestMapper.fromDomain(tech));
 
     }
 }

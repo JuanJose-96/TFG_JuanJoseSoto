@@ -1,5 +1,7 @@
 package com.juanjose.backendfastfix.application.service.technician;
 
+import com.juanjose.backendfastfix.application.port.in.client.DeleteClientImageUseCase;
+import com.juanjose.backendfastfix.application.port.in.technician.DeleteTechnicianImageUseCase;
 import com.juanjose.backendfastfix.application.port.in.technician.GetTechnicianProfileUseCase;
 import com.juanjose.backendfastfix.application.port.in.technician.UpdateTechnicianProfileUseCase;
 import com.juanjose.backendfastfix.application.port.in.technician.UploadTechnicianImageUseCase;
@@ -14,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class TechnicianProfileService implements UpdateTechnicianProfileUseCase,
-        UploadTechnicianImageUseCase, GetTechnicianProfileUseCase {
+        UploadTechnicianImageUseCase, GetTechnicianProfileUseCase, DeleteTechnicianImageUseCase {
     private final TechnicianRepositoryPort technicianRepositoryPort;
     private final ImageStoragePort imageStoragePort;
 
@@ -73,5 +75,22 @@ public class TechnicianProfileService implements UpdateTechnicianProfileUseCase,
                 .orElseThrow(() -> new TechnicianNotFoundException(id));
 
 
+    }
+
+
+    @Override
+    public Technician deleteProfileImage(Long id) {
+        Technician technician = technicianRepositoryPort.findById(id)
+                .orElseThrow(() -> new TechnicianNotFoundException(id));
+
+        if(technician.getProfileImageUrl() == null){
+            return technician;
+        }
+        imageStoragePort.deleteImage(technician.getProfileImageUrl());
+
+        Technician updateTechnician = technician.toBuilder()
+                .profileImageUrl(null).build();
+
+        return technicianRepositoryPort.save(updateTechnician);
     }
 }
