@@ -161,6 +161,18 @@ public class GlobalHandlerException {
                 ));
 
     }
+
+    @ExceptionHandler(WorkNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleWorkNotFoundException(WorkNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiErrorResponse(
+                        HttpStatus.NOT_FOUND.value(),
+                        "Not found",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                ));
+
+    }
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<ApiErrorResponse> handleDomainException(DomainException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
