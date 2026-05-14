@@ -1,11 +1,14 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.repository.client;
 
+import com.juanjose.backendfastfix.application.PagedResult;
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
 import com.juanjose.backendfastfix.domain.model.Client;
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.entity.ClientEntity;
 import com.juanjose.backendfastfix.infrastructure.adapter.out.persistance.mapper.ClientPersistenceMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -44,14 +47,20 @@ public class ClientRepositoryAdapter implements ClientRepositoryPort {
     }
 
     @Override
-    public List<Client> searchClients(String name, String province, String city) {
-        Pageable pageable = PageRequest.of(0,20);
+    public PagedResult<Client> searchClients(String name, String province, String city, int page) {
+        Pageable pageable = PageRequest.of(page,20, Sort.by(Sort.Order.desc("name")));
+        String namePattern = startsWithPattern(name);
 
-        String namePattern= startsWithPattern(name);
+        Page<ClientEntity> result = jpaClientRepository.searchClients(namePattern,province,city,pageable);
 
-        return jpaClientRepository.searchClients(namePattern,province,city,pageable)
+        List<Client> clients = result.getContent()
                 .stream().map(ClientPersistenceMapper::toDomain).toList();
+
+        return new PagedResult<>(clients, result.getNumber(), result.getTotalPages()
+                ,result.getTotalElements(), result.hasNext());
+
     }
+
 
     private String startsWithPattern(String name){
         if(name == null || name.isBlank()){

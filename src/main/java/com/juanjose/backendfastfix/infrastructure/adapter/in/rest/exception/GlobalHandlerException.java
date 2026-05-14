@@ -173,6 +173,17 @@ public class GlobalHandlerException {
                 ));
 
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ApiErrorResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        "Bad request",
+                        ex.getMessage(),
+                        LocalDateTime.now().toString()
+                ));
+
+    }
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<ApiErrorResponse> handleDomainException(DomainException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)

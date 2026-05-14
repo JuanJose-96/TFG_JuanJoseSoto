@@ -1,5 +1,6 @@
 package com.juanjose.backendfastfix.application.service.technician;
 
+import com.juanjose.backendfastfix.application.PagedResult;
 import com.juanjose.backendfastfix.application.port.in.technician.SearchTechniciansUseCase;
 import com.juanjose.backendfastfix.application.port.out.TechnicianRepositoryPort;
 import com.juanjose.backendfastfix.domain.model.Technician;
@@ -16,7 +17,10 @@ public class TechnicianSearchService implements SearchTechniciansUseCase {
     }
 
     @Override
-    public List<Technician> searchTechnicians(Long sectorId, String province, String city, Double rating) {
-        return technicianRepositoryPort.searchTechnicians(sectorId,province,city, rating);
+    public PagedResult<Technician> searchTechnicians(Long sectorId, String province, String city, Double rating, int page) {
+        if (page < 0){
+            throw new IllegalArgumentException("Page must be 0 or greater");
+        }
+        return technicianRepositoryPort.searchTechnicians(sectorId,province,city,rating,page);
     }
 }

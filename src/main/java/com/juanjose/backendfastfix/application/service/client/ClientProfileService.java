@@ -1,6 +1,7 @@
 package com.juanjose.backendfastfix.application.service.client;
 
 import com.juanjose.backendfastfix.application.port.in.client.DeleteClientImageUseCase;
+import com.juanjose.backendfastfix.application.port.in.client.GetClientProfileUseCase;
 import com.juanjose.backendfastfix.application.port.in.client.UpdateClientProfileUseCase;
 import com.juanjose.backendfastfix.application.port.in.client.UploadClientImageUseCase;
 import com.juanjose.backendfastfix.application.port.out.ClientRepositoryPort;
@@ -14,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ClientProfileService implements UpdateClientProfileUseCase,
-        UploadClientImageUseCase, DeleteClientImageUseCase {
+        UploadClientImageUseCase, DeleteClientImageUseCase, GetClientProfileUseCase {
 
     private final ClientRepositoryPort clientRepositoryPort;
     private final ImageStoragePort imageStoragePort;
@@ -80,5 +81,11 @@ public class ClientProfileService implements UpdateClientProfileUseCase,
                 .profileImageUrl(null).build();
 
         return clientRepositoryPort.save(updateClient);
+    }
+
+    @Override
+    public Client getProfile(Long id) {
+        return clientRepositoryPort.findById(id)
+                .orElseThrow(() -> new ClientNotFoundException(id));
     }
 }
