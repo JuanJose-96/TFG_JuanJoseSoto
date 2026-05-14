@@ -152,13 +152,35 @@ Si solo quieres validar la API o revisar el comportamiento del servidor, este re
 
 ```
 fastfix-backend/
-├── src/main/java/       # Código fuente (capas de la arquitectura hexagonal)
-├── src/main/resources/  # Configuración de la aplicación
-├── pom.xml              # Dependencias y configuración de Maven
-├── Dockerfile           # Construcción de la imagen del backend
-├── .dockerignore        # Archivos excluidos del contexto de build
-├── .env.example         # Plantilla de variables de entorno
-└── README.md
+├── .mvn/                                    
+├── src/
+│   └── main/
+│       └── java/
+│           └── com/juanjose/backendfastfix/
+│               ├── application/             # Capa de aplicación (casos de uso)
+│               │   ├── port/
+│               │   │   ├── in/              # Puertos de entrada
+│               │   │   └── out/             # Puertos de salida
+│               │   ├── service/             # Servicios de la capa de aplicación
+│               │   
+│               ├── domain/                  # Capa de dominio
+│               │   ├── exception/           # Excepciones de dominio
+│               │   └── model/               # Modelos / entidades de dominio
+│               ├── infrastructure/          # Capa de infraestructura (adaptadores)
+│               │   ├── adapter/
+│               │   │   ├── in/
+│               │   │   │   └── rest/        # Adaptador de entrada REST
+│               │   │   │       ├── controller/ # Endpoints de la aplicación
+│               │   │   │       ├── dto/        # Objetos de transferencia de datos
+│               │   │   │       ├── exception/ # Excepciones y respuestas http
+│               │   │   │       └── mapper/  # Traductores de solicitudes REST
+│               │   │   └── out/             # Adaptadores de salida
+│               │   │       ├── cloudinary/  # Integración con Cloudinary
+│               │   │       ├── persistance/ # Acceso a la base de datos
+│               │   │       └── security/    # Seguridad
+│               │   └── config/              # Configuración de Spring
+│               └── BackendFastFixApplication.java   # Clase principal de Spring Boot
+├
 ```
 
 ## Solución de problemas
