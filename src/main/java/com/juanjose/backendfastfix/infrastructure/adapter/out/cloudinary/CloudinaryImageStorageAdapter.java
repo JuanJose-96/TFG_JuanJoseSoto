@@ -1,0 +1,52 @@
+package com.juanjose.backendfastfix.infrastructure.adapter.out.cloudinary;
+
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import com.juanjose.backendfastfix.application.port.out.ImageStoragePort;
+import com.juanjose.backendfastfix.domain.exception.ImageUploadException;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.Map;
+
+@Component
+public class CloudinaryImageStorageAdapter implements ImageStoragePort {
+    private final Cloudinary cloudinary;
+
+    public CloudinaryImageStorageAdapter(Cloudinary cloudinary) {
+        this.cloudinary = cloudinary;
+    }
+
+    @Override
+    public String uploadImage(MultipartFile file) {
+        try {
+            Map result = cloudinary.uploader().upload(file.getBytes(),
+                    ObjectUtils.asMap(
+                            "folder", "fastfix/profiles",
+                            "resource_type", "image"
+                    ));
+            return result.get("secure_url").toString();
+        } catch (IOException e) {
+            throw new ImageUploadException("Error uploading image");
+        }
+    }
+
+    @Override
+    public void deleteImage(String imageUrl) {
+        try{
+            String publicId =extractPublicId(imageUrl);
+            cloudinary.uploader().destroy(publicId,ObjectUtils.emptyMap());
+
+        }catch(IOException e){
+            throw new ImageUploadException("Error deleting image");
+        }
+    }
+
+    private String extractPublicId(String imageUrl){
+        String[]parts =imageUrl.split("/upload/");
+        String afterUpload = parts[1];
+        String withoutVersion = afterUpload.substring(afterUpload.indexOf("/")+1);
+        return withoutVersion.substring(0,withoutVersion.lastIndexOf("."));
+    }
+}
