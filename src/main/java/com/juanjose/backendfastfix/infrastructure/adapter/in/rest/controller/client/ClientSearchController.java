@@ -1,6 +1,9 @@
 package com.juanjose.backendfastfix.infrastructure.adapter.in.rest.controller.client;
 
+import com.juanjose.backendfastfix.application.PagedResult;
 import com.juanjose.backendfastfix.application.port.in.client.SearchClientsUseCase;
+import com.juanjose.backendfastfix.domain.model.Client;
+import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.PagedResponse;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.dto.client.ClientResponse;
 import com.juanjose.backendfastfix.infrastructure.adapter.in.rest.mapper.ClientRestMapper;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +24,27 @@ public class ClientSearchController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ClientResponse>> searchClients(@RequestParam(required = false) String name,
-                                                              @RequestParam(required = false) String province,
-                                                              @RequestParam(required = false) String city){
-       List<ClientResponse> clients = searchClientsUseCase.searchClients(name,province,city)
-                .stream()
-               .map(ClientRestMapper::fromDomain).toList();
+    public ResponseEntity<PagedResponse<ClientResponse>> searchClients(@RequestParam(required = false) String name,
+                                                                       @RequestParam(required = false) String province,
+                                                                       @RequestParam(required = false) String city,
+                                                                       @RequestParam(defaultValue = "0") int page){
 
-        return ResponseEntity.ok(clients);
+        PagedResult<Client> result = searchClientsUseCase
+                .searchClients(name,province,city,page);
+
+        List<ClientResponse> clients = result.getContent().stream()
+                .map(ClientRestMapper::fromDomain).toList();
+
+        PagedResponse<ClientResponse> response = new PagedResponse<>(
+                clients,
+                result.getCurrentPage(),
+                result.getTotalPages(),
+                result.getTotalElements(),
+                result.isHasNext()
+        );
+
+        return ResponseEntity.ok(response);
+
 
     }
 }
